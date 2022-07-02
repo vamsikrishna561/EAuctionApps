@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OoEtOs1DwGRlEi/8QHy5EAzwk/FpmxdfrXMWCuvuY5f8ATzUOc2uBZSDupS0ogLjGQpvNS987OxXVUkLsdhPJw==",
+  "dgSpecHash": "BJSybmp/utmQEmFREp/SAeZd3vFsUfK6zUQGQLfQL4uJlitP5vQwxugNCXHpLuQ8sn3EdqdGWvO2pAu2VznfjA==",
   "success": true,
-  "projectFilePath": "E:\\E-Auction\\services\\E-Auction.API\\E-Auction.Application\\E-Auction.Application.csproj",
+  "projectFilePath": "C:\\Users\\cogdotnet423\\Downloads\\E-Auction\\E-Auction\\services\\E-Auction.API\\E-Auction.Application\\E-Auction.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

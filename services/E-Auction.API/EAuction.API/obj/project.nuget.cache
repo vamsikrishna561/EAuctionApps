@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "IHnVWB+A1YuqaZX8DSZzAWo342Cmk+wtlW7KtF4wBBjqcWrgz1uRMx5HuLdLXT/+bWEURleSFLWpzlmQXIJX/w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cogdotnet423\\Downloads\\E-Auction\\E-Auction\\services\\E-Auction.API\\EAuction.API\\EAuction.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\cogdotnet423\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -19,7 +19,7 @@ namespace E_Auction.Infrastructure.Contexts
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(new Category { Id = 1, CategoryName = "Painting" },
                 new Category { Id = 2, CategoryName = "Sculptor" },

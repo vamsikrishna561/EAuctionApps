@@ -76,6 +76,23 @@ namespace E_Auction.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Painting"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Sculptor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Ornament"
+                        });
                 });
 
             modelBuilder.Entity("E_Auction.Domain.Models.Product", b =>

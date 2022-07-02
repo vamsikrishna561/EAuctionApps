@@ -10,3 +10,15 @@ E:\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auc
 E:\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.dll
 E:\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\ref\E-Auction.Application.dll
 E:\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.pdb
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\bin\Debug\net5.0\E-Auction.Application.deps.json
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\bin\Debug\net5.0\E-Auction.Application.dll
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\bin\Debug\net5.0\ref\E-Auction.Application.dll
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\bin\Debug\net5.0\E-Auction.Application.pdb
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.csproj.AssemblyReference.cache
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.AssemblyInfoInputs.cache
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.AssemblyInfo.cs
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.csproj.CoreCompileInputs.cache
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.dll
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\ref\E-Auction.Application.dll
+C:\Users\cogdotnet423\Downloads\E-Auction\E-Auction\services\E-Auction.API\E-Auction.Application\obj\Debug\net5.0\E-Auction.Application.pdb

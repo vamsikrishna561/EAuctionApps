@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_Auction.Infrastructure.Migrations
 {
-    public partial class AddEAuctionTablesToDB : Migration
+    public partial class AddTablesWithSeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -91,6 +91,21 @@ namespace E_Auction.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[] { 1, "Painting" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[] { 2, "Sculptor" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[] { 3, "Ornament" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Buyers_ProductId",

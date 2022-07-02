@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Auction.Infrastructure.Migrations
 {
     [DbContext(typeof(EAuctionContext))]
-    [Migration("20220702091146_AddEAuctionTablesToDB")]
-    partial class AddEAuctionTablesToDB
+    [Migration("20220702110630_AddTablesWithSeedData")]
+    partial class AddTablesWithSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,6 +78,23 @@ namespace E_Auction.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Painting"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Sculptor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Ornament"
+                        });
                 });
 
             modelBuilder.Entity("E_Auction.Domain.Models.Product", b =>

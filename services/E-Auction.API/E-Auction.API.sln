@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Auction.API", "E-Auction.API\E-Auction.API.csproj", "{4814F942-A157-47A2-A153-4F51E8C1DEB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Auction.API", "E-Auction.API\E-Auction.API.csproj", "{4814F942-A157-47A2-A153-4F51E8C1DEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Auction.Application", "E-Auction.Application\E-Auction.Application.csproj", "{F790175B-EF6C-486A-A715-35605D08AF5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Auction.Application", "E-Auction.Application\E-Auction.Application.csproj", "{F790175B-EF6C-486A-A715-35605D08AF5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Auction.Domain", "E-Auction.Domain\E-Auction.Domain.csproj", "{B400D9B5-B913-4FA2-931F-E40490FCC21C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Auction.Domain", "E-Auction.Domain\E-Auction.Domain.csproj", "{B400D9B5-B913-4FA2-931F-E40490FCC21C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Auction.Infrastructure", "E-Auction.Infrastructure\E-Auction.Infrastructure.csproj", "{2C6923B4-283A-465D-8E03-FA7F14DF5604}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Auction.Infrastructure", "E-Auction.Infrastructure\E-Auction.Infrastructure.csproj", "{2C6923B4-283A-465D-8E03-FA7F14DF5604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAuction.API", "EAuction.API\EAuction.API.csproj", "{D1CD1791-6D2D-45CB-8A5B-FB517B02A673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2C6923B4-283A-465D-8E03-FA7F14DF5604}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C6923B4-283A-465D-8E03-FA7F14DF5604}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C6923B4-283A-465D-8E03-FA7F14DF5604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1CD1791-6D2D-45CB-8A5B-FB517B02A673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1CD1791-6D2D-45CB-8A5B-FB517B02A673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1CD1791-6D2D-45CB-8A5B-FB517B02A673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1CD1791-6D2D-45CB-8A5B-FB517B02A673}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
