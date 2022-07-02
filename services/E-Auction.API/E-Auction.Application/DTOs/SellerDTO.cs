@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Auction.Domain.Models
+namespace E_Auction.Domain.DTOs
 {
-    public class Seller
+    public class SellerDTO
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -17,6 +17,5 @@ namespace E_Auction.Domain.Models
         public int Pin { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<Product> products { get; set; }
     }
 }

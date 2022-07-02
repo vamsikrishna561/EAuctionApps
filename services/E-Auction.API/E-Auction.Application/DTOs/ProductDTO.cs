@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Auction.Domain.Models
+namespace E_Auction.Domain.DTOs
 {
-    public class Product
+    public class ProductDTO
     {
         
         public int Id { get; set; }
@@ -16,13 +16,7 @@ namespace E_Auction.Domain.Models
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
         public int CategoryId { get; set; }
-        public int SellerId { get; set; }
-        [Column(TypeName = "decimal(18,2)")]
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
-        
-        public virtual Category category { get; set; }
-        public virtual Seller seller { get; set; }
-        public virtual ICollection<Buyer> buyers { get; set; }
     }
 }

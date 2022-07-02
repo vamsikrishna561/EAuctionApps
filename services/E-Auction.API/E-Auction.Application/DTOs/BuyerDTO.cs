@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Auction.Domain.Models
+namespace E_Auction.Domain.DTOs
 {
-    public class Seller
+    public class BuyerDTO
     {
+        
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,6 +20,7 @@ namespace E_Auction.Domain.Models
         public int Pin { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<Product> products { get; set; }
+        public int ProductId { get; set; }
+        public decimal BidAmount { get; set; }
     }
 }
