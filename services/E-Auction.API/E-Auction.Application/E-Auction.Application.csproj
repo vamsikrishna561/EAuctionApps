@@ -10,6 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.29.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\E-Auction.Domain\E-Auction.Domain.csproj" />
   </ItemGroup>
 

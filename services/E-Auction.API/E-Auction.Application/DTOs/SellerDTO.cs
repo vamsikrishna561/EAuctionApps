@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Domain.DTOs
 {
-    public class SellerDTO
+    public class SellerDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -1,4 +1,6 @@
+using E_Auction.Application.Utils;
 using E_Auction.Infrastructure.Contexts;
+using E_Auction.Infrastructure.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,10 @@ namespace EAuction.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+            services.AddSingleton<Messages>();
+            services.AddHandlers();
+
             services.AddDbContext<EAuctionContext>(options =>
             options.UseSqlServer(
                 Configuration.GetConnectionString("EAUCTION")

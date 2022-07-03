@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Domain.DTOs
 {
-    public class ProductDTO
+    public class ProductDto
     {
         
         public int Id { get; set; }
@@ -18,5 +18,7 @@ namespace E_Auction.Domain.DTOs
         public int CategoryId { get; set; }
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
+
+        public SellerDto SellerDto { get; set; }
     }
 }

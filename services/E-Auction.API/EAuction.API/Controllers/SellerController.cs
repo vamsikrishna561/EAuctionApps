@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using E_Auction.Application.Commands;
+using E_Auction.Application.Utils;
+using E_Auction.Domain.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,10 +21,15 @@ namespace EAuction.API.Controllers
         };
 
         private readonly ILogger<SellerController> _logger;
+        private readonly IMapper _mapper;
+        private readonly Messages _messages;
 
-        public SellerController(ILogger<SellerController> logger)
+
+        public SellerController(ILogger<SellerController> logger, IMapper mapper, Messages messages)
         {
             _logger = logger;
+            _mapper = mapper;
+            _messages = messages;
         }
 
         [HttpGet]
@@ -34,6 +43,13 @@ namespace EAuction.API.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+        [HttpPost]
+        [Route("add-product")]
+        public IActionResult AddProduct([FromBody] ProductDto productDto)
+        {
+            AddProductInfoCommand addProductInfoCommand = _mapper.Map<AddProductInfoCommand>(productDto);
+            return Ok();
         }
     }
 }
