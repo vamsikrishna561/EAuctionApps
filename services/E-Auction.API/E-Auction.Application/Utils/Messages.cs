@@ -17,16 +17,13 @@ namespace E_Auction.Application.Utils
             _provider = provider;
         }
 
-        public Result Dispatch(ICommand command)
+        public async Task<Result> Dispatch(ICommand command)
         {
             Type type = typeof(ICommandHandler<>);
             Type[] typeArgs = { command.GetType() };
             Type handlerType = type.MakeGenericType(typeArgs);
-
             dynamic handler = _provider.GetService(handlerType);
-            return handler.Handler((dynamic)command);
-
-            //return result;
+            return await handler.Handler((dynamic)command);
         }
 
         public T Dispatch<T>(IQuery<T> query)

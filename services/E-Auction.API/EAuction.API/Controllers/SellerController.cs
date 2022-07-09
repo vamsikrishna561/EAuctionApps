@@ -48,16 +48,38 @@ namespace EAuction.API.Controllers
         }
         [HttpPost]
         [Route("add-product")]
-        public IActionResult AddProduct([FromBody] ProductDto productDto)
+        public async Task<IActionResult> AddProduct([FromBody] ProductDto productDto)
         {
             if (ModelState.IsValid)
             {
-                AddProductInfoCommand addProductInfoCommand = _mapper.Map<AddProductInfoCommand>(productDto);
-                var result= _messages.Dispatch(addProductInfoCommand);
-                return result.IsSuccess ? Ok() : BadRequest(result.Error);
+                if (productDto.BidEndDate > DateTime.UtcNow)
+                {
+                    AddProductInfoCommand addProductInfoCommand = _mapper.Map<AddProductInfoCommand>(productDto);
+                    var result = await _messages.Dispatch(addProductInfoCommand);
+                    return result.IsSuccess ? Ok() : BadRequest(result.Error);
+                }
+                else
+                    return BadRequest($"Bid Date should be future date.");
             }
             else
                 return BadRequest(ModelState);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public async Task<IActionResult> DeleteProduct(int productId)
+        {
+            if (productId > 0)
+            {
+                    DeleteProductInfoCommand deleteProductCommand = new ()
+                    {
+                        ProductId = productId
+                    };
+                    var result = await _messages.Dispatch(deleteProductCommand);
+                    return result.IsSuccess ? Ok() : BadRequest(result.Error);
+            }
+            else
+                return BadRequest("Invalid product id");
         }
     }
 }

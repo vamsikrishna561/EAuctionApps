@@ -25,14 +25,17 @@ namespace E_Auction.Infrastructure.Repositories
 
         public async Task AddSeller(Seller seller)
         {
-            this._eAuctionContext.Sellers.Add(seller);
-            await this._eAuctionContext.SaveChangesAsync();
+            if (this.GetSellerByEmailId(seller.Email) == null)
+            {
+                this._eAuctionContext.Sellers.Add(seller);
+                await this._eAuctionContext.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteProduct(Product product)
         {
-            this._eAuctionContext.Remove(product);
-            await this._eAuctionContext.SaveChangesAsync();
+            this._eAuctionContext.Products.Remove(product);
+            await this._eAuctionContext.SaveChangesAsync();            
         }
 
         public IEnumerable<Buyer> GetBidsByProductId(int productId)
@@ -43,6 +46,10 @@ namespace E_Auction.Infrastructure.Repositories
         public Seller GetSellerByEmailId(string emailId)
         {
             return this._eAuctionContext.Sellers.Where(x => x.Email == emailId).FirstOrDefault();
+        }
+        public Product GetProductById(int productId)
+        {
+            return this._eAuctionContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
         }
     }
 }

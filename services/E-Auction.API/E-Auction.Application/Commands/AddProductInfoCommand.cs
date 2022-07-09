@@ -39,28 +39,18 @@ namespace E_Auction.Application.Commands
             _serviceCollection = serviceCollection;
             _mapper = mapper;
         }
-        public Result Handler(AddProductInfoCommand command)
+        public async Task<Result> Handler(AddProductInfoCommand command)
         {
             Product product = _mapper.Map<Product>(command);
             using (var scope = _serviceCollection.CreateScope())
             {
                 var _sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
+                await _sellerRepository.AddSeller(product.Seller);
                 var seller = _sellerRepository.GetSellerByEmailId(product.Seller.Email);
-                if (seller != null)
-                {
-                    product.SellerId = seller.Id;
-                    
-                }
-                else
-                {
-                    _sellerRepository.AddSeller(product.Seller);
-                    seller = _sellerRepository.GetSellerByEmailId(product.Seller.Email);
-                    product.SellerId = seller.Id;
-                }
-                _sellerRepository.AddProduct(product);
-
-            }
-                      
+                product.SellerId = seller.Id;
+                product.Seller = null;
+                await _sellerRepository.AddProduct(product);
+            }                      
             return Result.Success();
         }
     }

@@ -19,8 +19,8 @@ namespace E_Auction.Domain.DTOs
         public string DetailedDescription { get; set; }
         public int CategoryId { get; set; }
         public decimal StartingPrice { get; set; }
-        public DateTime BidEndDate { get; set; }
+        public DateTime BidEndDate { get; set; } = DateTime.UtcNow;
 
-        public SellerDto Seller { get; set; }
+        public SellerDto Seller { get; set; } 
     }
 }

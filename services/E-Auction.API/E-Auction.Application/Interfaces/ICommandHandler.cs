@@ -9,6 +9,6 @@ namespace E_Auction.Application.Interfaces
 {
     public interface ICommandHandler<TCommand> where TCommand : ICommand
     {
-        public Result Handler(TCommand command);
+        public Task<Result> Handler(TCommand command);
     }
 }

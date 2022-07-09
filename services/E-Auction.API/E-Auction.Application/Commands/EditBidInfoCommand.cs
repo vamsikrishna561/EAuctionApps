@@ -19,7 +19,7 @@ namespace E_Auction.Application.Commands
         {
             _sellerRepository = sellerRepository ?? throw new ArgumentNullException();
         }
-        public Result Handler(EditBidInfoCommand command)
+        public async Task<Result> Handler(EditBidInfoCommand command)
         {
             return new Result();
         }

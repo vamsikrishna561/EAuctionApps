@@ -14,5 +14,6 @@ namespace E_Auction.Domain.Interfaces
         public Task DeleteProduct(Product product);
         public IEnumerable<Buyer> GetBidsByProductId(int productId);
         public Seller GetSellerByEmailId(string emailId);
+        Product GetProductById(int productId);
     }
 }
