@@ -12,6 +12,8 @@ namespace E_Auction.Domain.DTOs
     {
         
         public int Id { get; set; }
+        [Required]
+        [StringLength(30, MinimumLength = 5)]
         public string ProductName { get; set; }
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
@@ -19,6 +21,6 @@ namespace E_Auction.Domain.DTOs
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
 
-        public SellerDto SellerDto { get; set; }
+        public SellerDto Seller { get; set; }
     }
 }

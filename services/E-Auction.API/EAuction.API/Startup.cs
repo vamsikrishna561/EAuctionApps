@@ -1,5 +1,8 @@
+using E_Auction.Application.Interfaces;
+using E_Auction.Application.MapperProfiles;
 using E_Auction.Application.Utils;
 using E_Auction.Infrastructure.Contexts;
+using E_Auction.Infrastructure.Repositories;
 using E_Auction.Infrastructure.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,9 +33,12 @@ namespace EAuction.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(SellerProfile));
+            services.AddRepositories();
             services.AddSingleton<Messages>();
-            services.AddHandlers();
+            services.AddHandlers();      
+
+
 
             services.AddDbContext<EAuctionContext>(options =>
             options.UseSqlServer(

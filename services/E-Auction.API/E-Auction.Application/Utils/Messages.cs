@@ -24,9 +24,9 @@ namespace E_Auction.Application.Utils
             Type handlerType = type.MakeGenericType(typeArgs);
 
             dynamic handler = _provider.GetService(handlerType);
-            Result result = handler.Handle((dynamic)command);
+            return handler.Handler((dynamic)command);
 
-            return result;
+            //return result;
         }
 
         public T Dispatch<T>(IQuery<T> query)

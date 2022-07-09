@@ -1,4 +1,4 @@
-﻿using E_Auction.Application.Interfaces;
+﻿using E_Auction.Domain.Interfaces;
 using E_Auction.Domain.Models;
 using E_Auction.Infrastructure.Contexts;
 using System;

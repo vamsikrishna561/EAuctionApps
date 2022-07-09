@@ -21,8 +21,8 @@ namespace E_Auction.Domain.Models
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
         
-        public virtual Category category { get; set; }
-        public virtual Seller seller { get; set; }
-        public virtual ICollection<Buyer> buyers { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Seller Seller { get; set; }
+        public virtual ICollection<Buyer> Buyers { get; set; }
     }
 }

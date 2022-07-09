@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
+
 
 namespace EAuction.API.Controllers
 {
@@ -48,8 +50,14 @@ namespace EAuction.API.Controllers
         [Route("add-product")]
         public IActionResult AddProduct([FromBody] ProductDto productDto)
         {
-            AddProductInfoCommand addProductInfoCommand = _mapper.Map<AddProductInfoCommand>(productDto);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                AddProductInfoCommand addProductInfoCommand = _mapper.Map<AddProductInfoCommand>(productDto);
+                var result= _messages.Dispatch(addProductInfoCommand);
+                return result.IsSuccess ? Ok() : BadRequest(result.Error);
+            }
+            else
+                return BadRequest(ModelState);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using E_Auction.Application.Interfaces;
+﻿using CSharpFunctionalExtensions;
+using E_Auction.Application.Interfaces;
+using E_Auction.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,10 @@ namespace E_Auction.Application.Commands
         {
             _sellerRepository = sellerRepository ?? throw new ArgumentNullException();
         }
-        public void Handler(AddSellerInfoCommand command)
+        public Result Handler(AddSellerInfoCommand command)
         {
-            
+            return new Result();
+
         }
     }
 }

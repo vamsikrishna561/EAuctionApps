@@ -1,4 +1,5 @@
 ﻿using E_Auction.Application.Interfaces;
+using E_Auction.Domain.Interfaces;
 using E_Auction.Domain.DTOs;
 using System;
 using System.Collections.Generic;

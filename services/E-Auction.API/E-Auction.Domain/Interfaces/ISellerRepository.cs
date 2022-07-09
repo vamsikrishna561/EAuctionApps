@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Auction.Application.Interfaces
+namespace E_Auction.Domain.Interfaces
 {
     public interface ISellerRepository
     {
