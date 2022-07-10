@@ -40,5 +40,24 @@ namespace EAuction.API.Controllers
             else
                 return BadRequest(ModelState);
         }
+
+        [HttpPut]
+        [Route("update-bid/{productId}/{emailId}/{bidAmount}")]
+        public async Task<IActionResult> UpdateBid(int productId, string emailId, decimal bidAmount)
+        {
+            if (productId > 0 && !string.IsNullOrWhiteSpace(emailId))
+            {
+                EditBidInfoCommand editBidInfoCommand = new()
+                {
+                    ProductId = productId,
+                    Email = emailId,
+                    BidAmount = bidAmount
+                };
+                var result = await _messages.Dispatch(editBidInfoCommand);
+                return result.IsSuccess ? Ok() : BadRequest(result.Error);
+            }
+            else
+                return BadRequest();
+        }
     }
 }

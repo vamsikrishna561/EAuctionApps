@@ -49,7 +49,7 @@ namespace EAuction.API.Controllers
         }
 
         [HttpDelete]
-        [Route("delete")]
+        [Route("delete/{productId}")]
         public async Task<IActionResult> DeleteProduct(int productId)
         {
             if (productId > 0)
@@ -66,7 +66,7 @@ namespace EAuction.API.Controllers
         }
 
         [HttpGet]
-        [Route("show-bids")]
+        [Route("show-bids/{productId}")]
         public async Task<IActionResult> GetBids(int productId)
         {
             if (productId > 0)
