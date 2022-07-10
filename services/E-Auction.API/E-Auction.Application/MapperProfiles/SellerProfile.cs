@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using E_Auction.Application.Commands;
-using E_Auction.Domain.DTOs;
+using E_Auction.Application.DTOs;
 using E_Auction.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace E_Auction.Application.MapperProfiles
         public SellerProfile()
         {
             CreateMap<AddProductInfoCommand, ProductDto>().ReverseMap();
+            CreateMap<AddBidInfoCommand, BuyerDto>().ReverseMap();
             CreateMap<AddProductInfoCommand, Product>()
                 .ForPath(dest => dest.Seller.FirstName, opt => opt.MapFrom(src => src.SellerFirstName))
                 .ForPath(dest => dest.Seller.LastName, opt => opt.MapFrom(src => src.SellerLastName))
@@ -24,7 +25,11 @@ namespace E_Auction.Application.MapperProfiles
                 .ForPath(dest => dest.Seller.Phone, opt => opt.MapFrom(src => src.SellerPhone))
                 .ForPath(dest => dest.Seller.Pin, opt => opt.MapFrom(src => src.SellerPin))
                 .ForPath(dest => dest.Seller.State, opt => opt.MapFrom(src => src.SellerState));
-            ;
+            CreateMap<AddBidInfoCommand, Buyer>();
+            CreateMap<BuyerDto, Buyer>().ReverseMap();
+            CreateMap<Product, BidsDto>();
+
+
         }
     }
 }

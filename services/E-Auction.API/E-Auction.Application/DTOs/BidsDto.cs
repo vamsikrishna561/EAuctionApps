@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Application.DTOs
 {
-    public class ProductDto
+    public class BidsDto
     {
         
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace E_Auction.Application.DTOs
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; } = DateTime.UtcNow;
 
-        public SellerDto Seller { get; set; } 
+        public ICollection<BuyerDto> Buyers { get; set; }
     }
 }

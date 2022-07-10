@@ -9,7 +9,8 @@ namespace E_Auction.Domain.Interfaces
 {
     public interface IBuyerRepository
     {
-        public Task AddBid(Buyer buyer);
+        public Task PlaceBid(Buyer buyer);
         public Task UpdateBid(Buyer buyer);
+        public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId);
     }
 }

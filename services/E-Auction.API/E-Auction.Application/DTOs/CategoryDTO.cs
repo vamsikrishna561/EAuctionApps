@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Auction.Domain.DTOs
+namespace E_Auction.Application.DTOs
 {
     public class CategoryDto
     {        

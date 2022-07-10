@@ -1,61 +1,38 @@
 ﻿using E_Auction.Application.Interfaces;
 using E_Auction.Domain.Interfaces;
-using E_Auction.Domain.DTOs;
+using E_Auction.Application.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace E_Auction.Application.Commands
 {
-    public sealed class GetBidListQuery : IQuery<List<BuyerDto>>
+    public sealed class GetBidListQuery : IQuery<BidsDto>
     {
-        public string EnrolledIn { get; }
-        public int? NumberOfCourses { get; }
+        public int ProductId { get; set; }
 
-        public GetBidListQuery(string enrolledIn, int? numberOfCourses)
+        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, BidsDto>
         {
-            EnrolledIn = enrolledIn;
-            NumberOfCourses = numberOfCourses;
-        }
-
-        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, List<BuyerDto>>
-        {
-
-            private readonly ISellerRepository _sellerRepository;
-            public GetListQueryHandler(ISellerRepository sellerRepository)
+            private readonly IServiceProvider _serviceCollection;
+            private readonly IMapper _mapper;
+            public GetListQueryHandler(IServiceProvider serviceCollection, IMapper mapper)
             {
-                _sellerRepository = sellerRepository;
+                _serviceCollection = serviceCollection;
+                _mapper = mapper;
             }
 
-            public List<BuyerDto> Handle(GetBidListQuery query)
+            public async Task<BidsDto> Handle(GetBidListQuery query)
             {
-                return null;
-                //string sql = @"
-                //    SELECT s.StudentID Id, s.Name, s.Email,
-	               //     s.FirstCourseName Course1, s.FirstCourseCredits Course1Credits, s.FirstCourseGrade Course1Grade,
-	               //     s.SecondCourseName Course2, s.SecondCourseCredits Course2Credits, s.SecondCourseGrade Course2Grade
-                //    FROM dbo.Student s
-                //    WHERE (s.FirstCourseName = @Course
-		              //      OR s.SecondCourseName = @Course
-		              //      OR @Course IS NULL)
-                //        AND (s.NumberOfEnrollments = @Number
-                //            OR @Number IS NULL)
-                //    ORDER BY s.StudentID ASC";
-
-                //using (SqlConnection connection = new SqlConnection(_connectionString.Value))
-                //{
-                //    List<StudentDto> students = connection
-                //        .Query<StudentDto>(sql, new
-                //        {
-                //            Course = query.EnrolledIn,
-                //            Number = query.NumberOfCourses
-                //        })
-                //        .ToList();
-
-                //    return students;
-                //}
+                using (var scope = _serviceCollection.CreateScope())
+                {
+                    var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
+                    var product =await sellerRepository.GetBidsWithProductById(query.ProductId);
+                    return _mapper.Map<BidsDto>(product);
+                }
             }
         }
     }

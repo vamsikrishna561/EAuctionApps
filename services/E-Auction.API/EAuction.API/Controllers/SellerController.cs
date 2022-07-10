@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using E_Auction.Application.Commands;
 using E_Auction.Application.Utils;
-using E_Auction.Domain.DTOs;
+using E_Auction.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,10 +17,6 @@ namespace EAuction.API.Controllers
     [Route("[controller]")]
     public class SellerController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         private readonly ILogger<SellerController> _logger;
         private readonly IMapper _mapper;
@@ -32,19 +28,6 @@ namespace EAuction.API.Controllers
             _logger = logger;
             _mapper = mapper;
             _messages = messages;
-        }
-
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
         }
         [HttpPost]
         [Route("add-product")]
@@ -77,6 +60,23 @@ namespace EAuction.API.Controllers
                     };
                     var result = await _messages.Dispatch(deleteProductCommand);
                     return result.IsSuccess ? Ok() : BadRequest(result.Error);
+            }
+            else
+                return BadRequest("Invalid product id");
+        }
+
+        [HttpGet]
+        [Route("show-bids")]
+        public async Task<IActionResult> GetBids(int productId)
+        {
+            if (productId > 0)
+            {
+                GetBidListQuery getBidListQuery = new()
+                {
+                    ProductId = productId
+                };
+                var list = await _messages.Dispatch(getBidListQuery);
+                return Ok(list);
             }
             else
                 return BadRequest("Invalid product id");

@@ -1,6 +1,7 @@
 ﻿using E_Auction.Domain.Interfaces;
 using E_Auction.Domain.Models;
 using E_Auction.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,11 @@ namespace E_Auction.Infrastructure.Repositories
         public Product GetProductById(int productId)
         {
             return this._eAuctionContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
+        }
+
+        public async Task<Product> GetBidsWithProductById(int productId)
+        {
+            return await _eAuctionContext.Products.Where(x => x.Id == productId).Include(y => y.Buyers).FirstOrDefaultAsync();
         }
     }
 }

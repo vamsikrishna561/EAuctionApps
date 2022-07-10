@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using E_Auction.Application.Utils;
+using E_Auction.Application.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Auction.Application.Commands;
 
 namespace EAuction.API.Controllers
 {
@@ -11,29 +15,30 @@ namespace EAuction.API.Controllers
     [Route("[controller]")]
     public class BuyerController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly ILogger<SellerController> _logger;
+        private readonly IMapper _mapper;
+        private readonly Messages _messages;
 
-        private readonly ILogger<BuyerController> _logger;
 
-        public BuyerController(ILogger<BuyerController> logger)
+        public BuyerController(ILogger<SellerController> logger, IMapper mapper, Messages messages)
         {
             _logger = logger;
+            _mapper = mapper;
+            _messages = messages;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        [Route("place-bid")]
+        public async Task<IActionResult> PlaceBid([FromBody] BuyerDto buyerDto)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            if (ModelState.IsValid)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                    AddBidInfoCommand addProductInfoCommand = _mapper.Map<AddBidInfoCommand>(buyerDto);
+                    var result = await _messages.Dispatch(addProductInfoCommand);
+                    return result.IsSuccess ? Ok() : BadRequest(result.Error);
+            }
+            else
+                return BadRequest(ModelState);
         }
     }
 }

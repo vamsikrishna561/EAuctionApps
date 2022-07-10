@@ -16,15 +16,20 @@ namespace E_Auction.Infrastructure.Repositories
         {
             _eAuctionContext = eAuctionContext ?? throw new NullReferenceException();
         }
-        public async Task AddBid(Buyer buyer)
+        public async Task PlaceBid(Buyer buyer)
         {
-            this._eAuctionContext.Add(buyer);
+            this._eAuctionContext.Buyers.Add(buyer);
             await this._eAuctionContext.SaveChangesAsync();
         }
         public async Task UpdateBid(Buyer buyer)
         {
-            this._eAuctionContext.Update(buyer);
+            this._eAuctionContext.Buyers.Update(buyer);
             await this._eAuctionContext.SaveChangesAsync();
+        }
+
+        public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId)
+        {
+            return this._eAuctionContext.Buyers.Where(x=>x.ProductId == productId && x.Email == emailId).FirstOrDefault();
         }
     }
 }

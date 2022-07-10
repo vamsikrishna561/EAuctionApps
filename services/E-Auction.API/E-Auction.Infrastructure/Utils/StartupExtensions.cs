@@ -14,6 +14,7 @@ namespace E_Auction.Infrastructure.Utils
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<ISellerRepository, SellerRepository>();
+            services.AddScoped<IBuyerRepository, BuyerRepository>();
         }
     }
 }

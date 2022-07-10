@@ -9,6 +9,6 @@ namespace E_Auction.Application.Interfaces
     public interface IQueryHandler<TQuery, TResult>
        where TQuery : IQuery<TResult>
     {
-        TResult Handle(TQuery query);
+        Task<TResult> Handle(TQuery query);
     }
 }
