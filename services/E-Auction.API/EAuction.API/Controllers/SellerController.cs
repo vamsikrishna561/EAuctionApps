@@ -13,8 +13,9 @@ using CSharpFunctionalExtensions;
 
 namespace EAuction.API.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
     public class SellerController : ControllerBase
     {
 

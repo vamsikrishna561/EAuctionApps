@@ -11,8 +11,9 @@ using E_Auction.Application.Commands;
 
 namespace EAuction.API.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
     public class BuyerController : ControllerBase
     {
         private readonly ILogger<SellerController> _logger;
