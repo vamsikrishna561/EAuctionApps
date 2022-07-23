@@ -13,9 +13,11 @@ namespace E_Auction.Infrastructure.Repositories
     public class SellerRepository : ISellerRepository
     {
         private readonly EAuctionContext _eAuctionContext;
-        public SellerRepository(EAuctionContext eAuctionContext)
+        private readonly IMessageProducer _publishEndpoint;
+        public SellerRepository(EAuctionContext eAuctionContext, IMessageProducer publishEndpoint)
         {
             _eAuctionContext = eAuctionContext ?? throw new NullReferenceException();
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task AddProduct(Product product)
@@ -51,6 +53,11 @@ namespace E_Auction.Infrastructure.Repositories
         public Product GetProductById(int productId)
         {
             return this._eAuctionContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
+        }
+
+        public T GetMessage<T>()
+        {
+            return _publishEndpoint.GetMessage<T>();
         }
 
         public async Task<Product> GetBidsWithProductById(int productId)

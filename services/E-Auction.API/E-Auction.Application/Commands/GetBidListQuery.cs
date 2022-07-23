@@ -31,6 +31,7 @@ namespace E_Auction.Application.Commands
                 {
                     var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
                     var product =await sellerRepository.GetBidsWithProductById(query.ProductId);
+                    var result = sellerRepository.GetMessage<dynamic>();
                     return _mapper.Map<BidsDto>(product);
                 }
             }

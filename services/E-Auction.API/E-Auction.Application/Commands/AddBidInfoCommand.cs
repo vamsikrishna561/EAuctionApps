@@ -49,7 +49,11 @@ namespace E_Auction.Application.Commands
                     return Result.Failure("Bid End date is past.");
                     var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(buyer.ProductId, buyer.Email);
                     if (buyerItem == null)
+                    { 
                         await buyerRepository.PlaceBid(buyer);
+                    // Message to RabbitMQ. buyerRepository.GetBuyers()
+                     buyerRepository.SendMessage(command);
+                    }
                     else
                     return Result.Failure("Duplicate bid.");
             }

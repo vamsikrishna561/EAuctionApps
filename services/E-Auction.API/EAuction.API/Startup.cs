@@ -40,7 +40,7 @@ namespace EAuction.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(SellerProfile));
-            services.AddRepositories();
+            services.AddRepositories(Configuration);
             services.AddSingleton<Messages>();
             services.AddHandlers();      
 
