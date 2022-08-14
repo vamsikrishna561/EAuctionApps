@@ -5,7 +5,19 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host":"localhost",
+          "Host": "localhost",
+          "Port": 44300
+        }
+      ],
+      "UpstreamPathTemplate": "/{version}/Seller/show-bids/{productId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{version}/Seller/show-bids/{productId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
           "Port": 44300
         }
       ],

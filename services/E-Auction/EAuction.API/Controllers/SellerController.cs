@@ -82,5 +82,22 @@ namespace EAuction.API.Controllers
             else
                 return BadRequest("Invalid product id");
         }
+
+        [HttpGet]
+        [Route("get-products/{sellerId}")]
+        public async Task<IActionResult> GetProducts(int sellerId)
+        {
+            if (sellerId > 0)
+            {
+                GetProductListQuery getBidListQuery = new()
+                {
+                    SellerId = sellerId
+                };
+                var list = await _messages.Dispatch(getBidListQuery);
+                return Ok(list);
+            }
+            else
+                return BadRequest("Invalid seller id");
+        }
     }
 }

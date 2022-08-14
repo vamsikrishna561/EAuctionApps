@@ -6,8 +6,8 @@ import { catchError, map } from 'rxjs/operators';
 import { Bid } from '../shared/interfaces/bid';
 import { Observable, throwError } from 'rxjs';
 import { Comment } from '../shared/interfaces/comment';
-import { ProductInfo } from '../shared/interfaces/productInfoparam';
-import { error } from '@angular/compiler/src/util';
+//import { ProductInfo } from '../shared/interfaces/productInfoparam';
+//import { error } from '@angular/compiler/src/util';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
