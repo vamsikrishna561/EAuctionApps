@@ -1,0 +1,195 @@
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Bids</h2>
+
+
+      </div>
+      <div class="col-lg-3">
+        <div class="form-group">
+
+          <select class="form-control my-form" name="sel" id="sel" [(ngModel)]="selProductId" (change)="OnSelectedProduct();">
+            <option [value]="0">Select Product</option>
+            <option *ngFor="let item of lstProducts" [value]="item.productId">{{item.productName}}</option>
+          </select>
+        </div>
+        <div *ngIf="selProducts"> <button type="button" (click)="openAddBidPopup();" class="btn btn-outline-info">Add New Bid</button></div>
+      </div>
+      <div class="col-lg-9">
+        <h4 *ngIf="selProducts">Product Details</h4>
+        <table *ngIf="selProducts" class="table" style="overflow-y: auto !important;">
+          <thead>
+            <tr>
+              <th scope="col">Short Description</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Start Price</th>
+              <th scope="col">Bid Start Date</th>
+              <th scope="col">Bid End Date</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{selProducts.shortDescription | shorten:20}}</td>
+              <td title="{{selProducts.detailedDescription}}">{{selProducts.detailedDescription | shorten:20}}</td>
+              <td>{{selProducts.category}}</td>
+              <td>${{selProducts.startingPrice}}</td>
+              <td>{{selProducts.createdDate  | date}}</td>
+              <td>{{selProducts.bidEndDate  | date}}</td>
+
+
+            </tr>
+
+          </tbody>
+        </table>
+        <div *ngIf="!selProducts">Please select a product for Bids</div>
+      </div>
+    </div>
+
+    <br />
+    <table *ngIf="bidData && bidData.buyerInfoVM.length>0" class="table" style="overflow-y: auto !important;">
+      <thead>
+        <tr>
+          <th scope="col">Buyer Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Bid Amount</th>
+          <th scope="col">Bid Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of bidData.buyerInfoVM">
+          <td>{{item.firstName}} {{item.lastName}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.email}}</td>
+          <td>{{getFullAddress(item.address,item.city,item.state,item.pinCode) | shorten:20}}</td>
+          <td style="color:green !important;">${{item.bidAmount}}</td>
+          <td>{{item.createdDate  | date}}</td>
+
+          <td>
+            <button type="button" (click)="updateBid(item.productId,item.email);" class="btn btn-outline-info">Update Bid</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div class="form-group" *ngIf="bidData && bidData?.buyerInfoVM.length==0">
+      <span>No bid available for this product. Please add a new bid</span>
+    </div>
+  </div>
+</section>
+
+
+
+<div  class="modal"
+     tabindex="-1"
+     role="dialog"
+     [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Bid</h4>
+      </div>
+      <div class="modal-body">
+        <div style="color:red !important;" *ngIf="errorMessage!=''">
+          <p>{{errorMessage}}</p>
+        </div>
+        <div class="form-group">
+          <input type="number" min="1" name="newBidAmt" class="form-control my-form" placeholder="New Bid Amount"
+                 [(ngModel)]="newBidAmt" />
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closeUpdateBidPopup();">
+          Close
+        </button>
+        <button type="button" class="btn btn-success"
+                (click)="UpdateBid();">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal"
+     tabindex="-1"
+     role="dialog"
+     [ngStyle]="{'display':displayStyleAdd}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Bid on {{selProducts?.productName}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+           
+            <div style="color:red !important;" *ngIf="eMsg!=''">
+              <p>{{eMsg}}</p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" name="fname" class="form-control my-form" placeholder="Buyer First Name"
+                     [(ngModel)]="fname" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="address" class="form-control my-form" placeholder="Address"
+                     [(ngModel)]="address" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="state" class="form-control my-form" placeholder="State"
+                     [(ngModel)]="state" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="phone" class="form-control my-form" placeholder="Phone"
+                     [(ngModel)]="phone" />
+            </div>
+            <div class="form-group">
+              <input type="number" min="1" name="Amt" class="form-control my-form" placeholder="Bid Amount"
+                     [(ngModel)]="Amt" />
+
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" name="lname" class="form-control my-form" placeholder="Buyer Last Name"
+                     [(ngModel)]="lname" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="city" class="form-control my-form" placeholder="City"
+                     [(ngModel)]="city" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="zip" class="form-control my-form" placeholder="Pin Code"
+                     [(ngModel)]="zip" />
+            </div>
+            <div class="form-group">
+              <input type="text" name="email" class="form-control my-form" placeholder="Email"
+                     [(ngModel)]="email" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closeAddBidPopup()">
+          Close
+        </button>
+        <button type="button" class="btn btn-success"
+                (click)="AddBid();">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
