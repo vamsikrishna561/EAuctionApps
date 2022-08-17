@@ -20,7 +20,9 @@ namespace E_Auction.Application.DTOs
         public int CategoryId { get; set; }
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; } = DateTime.UtcNow;
+        public CategoryDto Category { get; set; }
+        public SellerDto Seller { get; set; }
 
-        public SellerDto Seller { get; set; } 
+        public virtual List<BuyerDto> Buyers { get; set; }
     }
 }

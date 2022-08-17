@@ -13,6 +13,8 @@ namespace E_Auction.Domain.Interfaces
         public Task AddSeller(Seller seller);
         public Task DeleteProduct(Product product);
         public IEnumerable<Buyer> GetBidsByProductId(int productId);
+
+        public Task<List<Product>> GetProducts();
         public Seller GetSellerByEmailId(string emailId);
         Product GetProductById(int productId);
         public T GetMessage<T>();

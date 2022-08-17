@@ -28,6 +28,9 @@ namespace E_Auction.Application.MapperProfiles
             CreateMap<AddBidInfoCommand, Buyer>();
             CreateMap<BuyerDto, Buyer>().ReverseMap();
             CreateMap<Product, BidsDto>();
+            CreateMap<Product, ProductDto>();
+            CreateMap<Seller, SellerDto>();
+            CreateMap<Category, CategoryDto>();
 
 
         }

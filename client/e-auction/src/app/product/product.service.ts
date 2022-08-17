@@ -71,9 +71,9 @@ export class ProductService {
   }
 
   //New Method Added
-  getAllSeller(): Observable<any[]> {
+  getAllSeller(): Observable<Product[]> {
     //console.log(this.httpClient);
-    return this.httpClient.get<any[]>(`getAllSeller`).pipe(map((products) => {
+    return this.httpClient.get<Product[]>(`getAllSeller`).pipe(map((products) => {
       return products;
     }));
   }
@@ -84,7 +84,7 @@ export class ProductService {
 
   getAllproducts(): Observable<any[]> {
     //console.log(this.httpClient);
-    return this.httpClient.get<any[]>(`getAllproducts`).pipe(map((products) => {
+    return this.httpClient.get<any[]>(`Seller/get-products`).pipe(map((products) => {
       return products;
     }));
   }
@@ -94,7 +94,7 @@ export class ProductService {
   //}
 
   GetAllBids(productId: number): Observable<any> {
-    return this.httpClient.get<any>(`show-bids/${productId}`).pipe(map((products) => {
+    return this.httpClient.get<any>(`Seller/show-bids/${productId}`).pipe(map((products) => {
       return products;
     }));
   }

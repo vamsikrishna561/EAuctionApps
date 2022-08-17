@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../product.service';
-import {Product} from '../../shared/interfaces/product';
+import {Buyer, Product} from '../../shared/interfaces/product';
 
 import {switchMap, tap} from 'rxjs/operators';
 import {Title} from '@angular/platform-browser';
@@ -14,9 +14,9 @@ import {Title} from '@angular/platform-browser';
 })
 export class DetailsComponent implements OnInit {
   selProductId: number=0;
-  lstProducts: any[] = [];
-  selProducts: any;
-  bidData: any;
+  lstProducts: Product[] = [];
+  selProducts: Product = {};
+  bids?: Buyer[] = [];
 
   isNewAmtShow: boolean = false;
   constructor(private route: ActivatedRoute, private productService: ProductService, private router: Router, private title: Title) {
@@ -32,16 +32,20 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  OnSelectedProduct() {
-    this.selProducts = this.lstProducts.filter(a => a.productId == this.selProductId)[0];
-    if (this.selProductId != 0) { this.showAllBids(); }
+  OnSelectedProduct(value:string) {
+    debugger;
+    this.selProductId = +value;
+    this.selProducts = this.lstProducts.filter(a => a.id == this.selProductId)[0];
+    if (this.selProductId != 0) { 
+      this.bids = this.selProducts.buyers;
+      // this.showAllBids(); 
+    }
   }
 
   showAllBids() {
-    this.productService.GetAllBids(this.selProductId).subscribe(data => {
-      this.bidData = data;
-      console.log(this.bidData);
-    });
+    //this.productService.GetAllBids(this.selProductId).subscribe(data => {
+      //this.bids = data;
+    //});
   }
 
   bidProductId: number = 0;

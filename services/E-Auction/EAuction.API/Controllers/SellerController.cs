@@ -84,20 +84,17 @@ namespace EAuction.API.Controllers
         }
 
         [HttpGet]
-        [Route("get-products/{sellerId}")]
-        public async Task<IActionResult> GetProducts(int sellerId)
+        [Route("get-products")]
+        public async Task<IActionResult> GetProducts()
         {
-            if (sellerId > 0)
-            {
-                GetProductListQuery getBidListQuery = new()
-                {
-                    SellerId = sellerId
-                };
+            //if (sellerId > 0)
+           // {
+                GetProductListQuery getBidListQuery = new();
                 var list = await _messages.Dispatch(getBidListQuery);
                 return Ok(list);
-            }
-            else
-                return BadRequest("Invalid seller id");
+            //}
+            //else
+              //  return BadRequest("Invalid seller id");
         }
     }
 }

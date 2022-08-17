@@ -55,6 +55,12 @@ namespace E_Auction.Infrastructure.Repositories
             return this._eAuctionContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
         }
 
+        public async Task<List<Product>> GetProducts()
+        {
+            return await this._eAuctionContext.Products.Include(x=>x.Seller).Include(y=>y.Category)
+                .Include(y => y.Buyers).ToListAsync();
+        }
+
         public T GetMessage<T>()
         {
             return _publishEndpoint.GetMessage<T>();

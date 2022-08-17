@@ -3,18 +3,45 @@ import {Bid} from './bid';
 import {Comment} from './comment';
 
 export interface Product {
-  _id: string;
-  endString: string;
-  image: string | null;
-  title: string;
-  description: string;
-  endTime: string;
-  startPrice: string;
-  creator: Creator | string;
-  createTime: string;
-  isOwner: boolean;
-  bids: Bid[];
-  priceValue: number;
-  comments: Comment[];
-  likes: string[];
+  id?: number;
+  productName?: string;
+  shortDescription?: string | null;
+  detailedDescription?: string;
+  categoryId?: number;
+  sellerId?: number;
+  startingPrice?: string;
+  bidEndDate?: string;
+  category?: Category;
+  seller?: Seller;
+  buyers?: Buyer[];
+}
+
+export interface Category{
+  id?: string;
+  categoryName?: string;
+}
+
+export interface Seller{
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  pin?: string;
+  phone?: string;
+  email?: string;
+}
+
+export interface Buyer{
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  pin?: string;
+  phone?: string;
+  email?: string;
+  bidAmount?:number;
 }
