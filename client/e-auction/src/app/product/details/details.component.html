@@ -1,46 +1,34 @@
 <section id="contact">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <h2></h2>
-
-
-      </div>
-      <div class="col-lg-3">
-        <div class="form-group">
+      <div class="row">
+        <div class="col">Products</div>
+        <div class="col">
           <select #products class="form-control my-form" name="sel" id="sel" (change)="OnSelectedProduct(products.value);">
             <option [value]="0">Select Product</option>
             <option *ngFor="let item of lstProducts" [value]="item.id">{{item.productName}}</option>
           </select>
         </div>
-        <!-- <div *ngIf="selProducts"> <button type="button" (click)="openAddBidPopup();" class="btn btn-outline-info">Add New Bid</button></div> -->
       </div>
-      <div class="col-lg-9">
-        <!-- <h4 *ngIf="selProducts">Product Details</h4> -->
+      <div class="row">
         <div *ngIf="selProducts" class="table" style="overflow-y: auto !important;">
           <div>
             <div>
-              <div scope="col">Product Name</div>
-              <div scope="col">Short Description</div>
-              <div scope="col">Description</div>
-              <div scope="col">Category</div>
-              <div scope="col">Start Price</div>
-              <div scope="col">Bid End Date</div>
+              <div class="row"><div class="col" scope="col">Product Name</div> 
+              <div class="col">{{selProducts.productName | shorten:20}}</div></div>
+              <div class="row"><div class="col" scope="col">Short Description</div> 
+              <div class="col">{{selProducts.shortDescription | shorten:20}}</div></div>
+              <div class="row"><div class="col" scope="col">Description</div> 
+              <div class="col" title="{{selProducts.detailedDescription}}">{{selProducts.detailedDescription | shorten:20}}</div></div>
+              <div class="row"><div class="col" scope="col">Category</div> 
+              <div class="col">{{selProducts.category?.categoryName}}</div></div>
+              <div class="row"><div class="col" scope="col">Start Price</div> 
+              <div class="col" *ngIf="selProducts.startingPrice">${{selProducts.startingPrice}}</div></div>
+              <div class="row"><div class="col" scope="col">Bid End Date</div> 
+              <div class="col">{{selProducts.bidEndDate  | date}}</div></div>
+              
 
             </div>
-          </div>
-          <div>
-            <div>
-              <div>{{selProducts.productName | shorten:20}}</div>
-              <div>{{selProducts.shortDescription | shorten:20}}</div>
-              <div title="{{selProducts.detailedDescription}}">{{selProducts.detailedDescription | shorten:20}}</div>
-              <div>{{selProducts.category?.categoryName}}</div>
-              <div>${{selProducts.startingPrice}}</div>
-              <div>{{selProducts.bidEndDate  | date}}</div>
-
-
-            </div>
-
           </div>
         </div>
         <div *ngIf="bids && bids.length>0">Bids</div>
