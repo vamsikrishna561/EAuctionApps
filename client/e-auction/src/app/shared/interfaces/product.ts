@@ -22,7 +22,7 @@ export interface Category{
 }
 
 export interface Seller{
-  id?: string;
+  id?: number;
   firstName?: string;
   lastName?: string;
   address?: string;
