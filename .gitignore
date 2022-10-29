@@ -1,0 +1,16 @@
+﻿./**/obj
+./**/bin
+./.vs
+/services/E-Auction/.vs
+/services/E-Auction/E-Auction.Application/bin/Debug/net5.0
+/services/E-Auction/E-Auction.Application/obj
+/client/e-auction/.vscode
+/services/E-Auction/E-Auction.Domain/obj
+/services/E-Auction/E-Auction.Domain/E-Auction.Domain.csproj.user
+/services/E-Auction/E-Auction.Domain/bin/Debug/net5.0
+/services/E-Auction/E-Auction.Infrastructure/obj
+/services/E-Auction/E-Auction.Infrastructure/bin/Debug/net5.0
+/services/E-Auction/E-Auction.Ocelot.API.Gateway/obj
+/services/E-Auction/E-Auction.Ocelot.API.Gateway/bin/Debug/net5.0
+/services/E-Auction/EAuction.API/obj
+/services/E-Auction/EAuction.API/bin/Debug/net5.0
