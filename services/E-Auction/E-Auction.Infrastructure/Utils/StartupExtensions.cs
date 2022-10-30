@@ -1,21 +1,41 @@
 ﻿using E_Auction.Domain.Interfaces;
 using E_Auction.Domain;
 using E_Auction.Infrastructure.Messages;
-using E_Auction.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-   
+using E_Auction.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace E_Auction.Infrastructure.Utils
 {
     public static class StartupExtensions
     {
-        public static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ISellerRepository, SellerRepository>();
-            services.AddScoped<IBuyerRepository, BuyerRepository>();
-            services.AddScoped<IMessageProducer, MessageProducer>();
-            services.Configure<RabbitMq>(configuration.GetSection("RabbitMq"));
+            if (configuration.GetValue<bool>("Cosmos:Enabled"))
+            {
+                services.AddDbContext<CosmosContext>(options =>
+                    options.UseCosmos(
+                        configuration["Cosmos:AccountEndpoint"],
+                        configuration["Cosmos:AccountKey"],
+                        configuration["Cosmos:DatabaseName"])
+                );
+                services.AddScoped<ISellerRepository, Repositories.Cosmos.SellerRepository>();
+                services.AddScoped<IBuyerRepository, Repositories.Cosmos.BuyerRepository>();
+                services.AddScoped<IMessageProducer, MessageProducer>();
+            }
+            else
+            {
+                services.AddDbContext<EAuctionContext>(options =>
+            options.UseSqlServer(
+                configuration.GetConnectionString("EAUCTION")
+                ));
+                services.AddScoped<ISellerRepository, Repositories.SellerRepository>();
+                services.AddScoped<IBuyerRepository, Repositories.BuyerRepository>();
+                services.AddScoped<IMessageProducer, MessageProducer>();
+                services.Configure<RabbitMq>(configuration.GetSection("RabbitMq"));
+            }
         }
     }
 }

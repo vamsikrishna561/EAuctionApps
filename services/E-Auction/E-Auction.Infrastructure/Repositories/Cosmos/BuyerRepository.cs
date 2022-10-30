@@ -6,29 +6,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_Auction.Infrastructure.Repositories
+namespace E_Auction.Infrastructure.Repositories.Cosmos
 {
     public class BuyerRepository : IBuyerRepository
     {
-        private readonly EAuctionContext _eAuctionContext;
+        private readonly CosmosContext _cosmosContext;
         private readonly IMessageProducer _publishEndpoint;
 
 
-        public BuyerRepository(EAuctionContext eAuctionContext, IMessageProducer publishEndpoint)
+        public BuyerRepository(CosmosContext cosmosContext, IMessageProducer publishEndpoint)
         {
-            _eAuctionContext = eAuctionContext ?? throw new NullReferenceException();
+            _cosmosContext = cosmosContext ?? throw new NullReferenceException();
             _publishEndpoint = publishEndpoint;
 
         }
         public async Task PlaceBid(Buyer buyer)
         {
-            _eAuctionContext.Buyers.Add(buyer);
-            await _eAuctionContext.SaveChangesAsync();
+            _cosmosContext.Buyers.Add(buyer);
+            await _cosmosContext.SaveChangesAsync();
         }
         public async Task UpdateBid(Buyer buyer)
         {
-            _eAuctionContext.Buyers.Update(buyer);
-            await _eAuctionContext.SaveChangesAsync();
+            _cosmosContext.Buyers.Update(buyer);
+            await _cosmosContext.SaveChangesAsync();
         }
 
         public void SendMessage<T>(T buyer)
@@ -40,12 +40,12 @@ namespace E_Auction.Infrastructure.Repositories
 
         public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId)
         {
-            return _eAuctionContext.Buyers.Where(x=>x.ProductId == productId && x.Email == emailId).FirstOrDefault();
+            return _cosmosContext.Buyers.Where(x=>x.ProductId == productId && x.Email == emailId).FirstOrDefault();
         }
 
         public List<Buyer> GetBuyers()
         {
-            return _eAuctionContext.Buyers.ToList();
+            return _cosmosContext.Buyers.ToList();
         }
     }
 }

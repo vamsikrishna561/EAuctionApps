@@ -40,16 +40,9 @@ namespace EAuction.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(SellerProfile));
-            services.AddRepositories(Configuration);
+            services.AddInfrastructureServices(Configuration);
             services.AddSingleton<Messages>();
-            services.AddHandlers();      
-
-
-
-            services.AddDbContext<EAuctionContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("EAUCTION")
-                ));
+            services.AddHandlers();            
 
             services.AddControllers();
             services.AddApiVersioning(options =>

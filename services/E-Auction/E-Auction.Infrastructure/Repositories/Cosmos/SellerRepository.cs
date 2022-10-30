@@ -7,56 +7,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_Auction.Infrastructure.Repositories
+namespace E_Auction.Infrastructure.Repositories.Cosmos
 {
     public class SellerRepository : ISellerRepository
     {
-        private readonly EAuctionContext _eAuctionContext;
+        private readonly CosmosContext _cosmosContext;
         private readonly IMessageProducer _publishEndpoint;
-        public SellerRepository(EAuctionContext eAuctionContext, IMessageProducer publishEndpoint)
+        public SellerRepository(CosmosContext cosmosContext, IMessageProducer publishEndpoint)
         {
-            _eAuctionContext = eAuctionContext ?? throw new NullReferenceException();
+            _cosmosContext = cosmosContext ?? throw new NullReferenceException();
             _publishEndpoint = publishEndpoint;
         }
 
         public async Task AddProduct(Product product)
         {
-            _eAuctionContext.Products.Add(product);
-            await _eAuctionContext.SaveChangesAsync();
+            _cosmosContext.Products.Add(product);
+            await _cosmosContext.SaveChangesAsync();
         }
 
         public async Task AddSeller(Seller seller)
         {
             if (GetSellerByEmailId(seller.Email) == null)
             {
-                _eAuctionContext.Sellers.Add(seller);
-                await _eAuctionContext.SaveChangesAsync();
+                _cosmosContext.Sellers.Add(seller);
+                await _cosmosContext.SaveChangesAsync();
             }
         }
 
         public async Task DeleteProduct(Product product)
         {
-            _eAuctionContext.Products.Remove(product);
-            await _eAuctionContext.SaveChangesAsync();            
+            _cosmosContext.Products.Remove(product);
+            await _cosmosContext.SaveChangesAsync();            
         }
 
         public IEnumerable<Buyer> GetBidsByProductId(int productId)
         {
-            return _eAuctionContext.Buyers.Where(x=>x.ProductId == productId).ToList();
+            return _cosmosContext.Buyers.Where(x=>x.ProductId == productId).ToList();
         }
 
         public Seller GetSellerByEmailId(string emailId)
         {
-            return _eAuctionContext.Sellers.Where(x => x.Email == emailId).FirstOrDefault();
+            return _cosmosContext.Sellers.Where(x => x.Email == emailId).FirstOrDefault();
         }
         public Product GetProductById(int productId)
         {
-            return _eAuctionContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
+            return _cosmosContext.Products.Where(x=>x.Id == productId).FirstOrDefault();
         }
 
         public async Task<List<Product>> GetProducts()
         {
-            return await _eAuctionContext.Products.Include(x=>x.Seller).Include(y=>y.Category)
+            return await _cosmosContext.Products.Include(x=>x.Seller).Include(y=>y.Category)
                 .Include(y => y.Buyers).ToListAsync();
         }
 
@@ -67,7 +67,7 @@ namespace E_Auction.Infrastructure.Repositories
 
         public async Task<Product> GetBidsWithProductById(int productId)
         {
-            return await _eAuctionContext.Products.Where(x => x.Id == productId).Include(y => y.Buyers).FirstOrDefaultAsync();
+            return await _cosmosContext.Products.Where(x => x.Id == productId).Include(y => y.Buyers).FirstOrDefaultAsync();
         }
     }
 }

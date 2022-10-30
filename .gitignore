@@ -14,3 +14,9 @@
 /services/E-Auction/E-Auction.Ocelot.API.Gateway/bin/Debug/net5.0
 /services/E-Auction/EAuction.API/obj
 /services/E-Auction/EAuction.API/bin/Debug/net5.0
+/services/E-Auction/E-Auction.Ocelot.API.Gateway/bin/Debug/net6.0
+/services/E-Auction/EAuction.API/bin/Debug/net6.0
+/services/E-Auction/E-Auction.Application/bin/Debug/net6.0
+/services/E-Auction/E-Auction.Domain/bin/Debug/net6.0
+/services/E-Auction/E-Auction.Infrastructure/bin/Debug/net6.0
+/services/E-Auction.API/EAuction.API/EAuction.API.xml
