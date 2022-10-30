@@ -5,6 +5,14 @@ namespace E_Auction.Infrastructure.Contexts
 {
     public class CosmosContext : DbContext
     {
+        public CosmosContext()
+        {
+        }
+
+        public CosmosContext(DbContextOptions<CosmosContext> options) : base(options)
+        {
+            this.Database.EnsureCreated();
+        }
         public DbSet<Product> Products { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Seller> Sellers { get; set; }
