@@ -1,4 +1,4 @@
-﻿using E_Auction.Domain.Models;
+﻿using E_Auction.Domain.Models.Cosmos;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Auction.Infrastructure.Contexts

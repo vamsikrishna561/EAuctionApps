@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using E_Auction.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 namespace E_Auction.Infrastructure.Utils
 {
@@ -21,8 +20,8 @@ namespace E_Auction.Infrastructure.Utils
                         configuration["Cosmos:AccountKey"],
                         configuration["Cosmos:DatabaseName"])
                 );
-                services.AddScoped<ISellerRepository, Repositories.Cosmos.SellerRepository>();
-                services.AddScoped<IBuyerRepository, Repositories.Cosmos.BuyerRepository>();
+                services.AddScoped<Domain.Interfaces.Cosmos.ISellerRepository, Repositories.Cosmos.SellerRepository>();
+                services.AddScoped<Domain.Interfaces.Cosmos.IBuyerRepository, Repositories.Cosmos.BuyerRepository>();
                 services.AddScoped<IMessageProducer, MessageProducer>();
             }
             else

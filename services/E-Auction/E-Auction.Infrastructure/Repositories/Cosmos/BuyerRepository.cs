@@ -1,5 +1,5 @@
-﻿using E_Auction.Domain.Interfaces;
-using E_Auction.Domain.Models;
+﻿using E_Auction.Domain.Interfaces.Cosmos;
+using E_Auction.Domain.Models.Cosmos;
 using E_Auction.Infrastructure.Contexts;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,11 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
     public class BuyerRepository : IBuyerRepository
     {
         private readonly CosmosContext _cosmosContext;
-        private readonly IMessageProducer _publishEndpoint;
 
 
-        public BuyerRepository(CosmosContext cosmosContext, IMessageProducer publishEndpoint)
+        public BuyerRepository(CosmosContext cosmosContext)
         {
             _cosmosContext = cosmosContext ?? throw new NullReferenceException();
-            _publishEndpoint = publishEndpoint;
 
         }
         public async Task PlaceBid(Buyer buyer)
@@ -31,16 +29,16 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
             await _cosmosContext.SaveChangesAsync();
         }
 
-        public void SendMessage<T>(T buyer)
-        {
-            _publishEndpoint.SendMessage(buyer);
-        }
+        //public void SendMessage<T>(T buyer)
+        //{
+        //    _publishEndpoint.SendMessage(buyer);
+        //}
 
         
 
         public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId)
         {
-            return _cosmosContext.Buyers.Where(x=>x.ProductId == productId && x.Email == emailId).FirstOrDefault();
+            return _cosmosContext.Buyers.Where(x=>x.Email == emailId).FirstOrDefault();
         }
 
         public List<Buyer> GetBuyers()
