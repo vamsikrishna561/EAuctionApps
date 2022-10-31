@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using E_Auction.Domain.Interfaces.Cosmos;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
@@ -39,13 +40,27 @@ namespace E_Auction.Application.Commands.Cosmos
         public async Task<Result> Handler(AddProductInfoCommand command)
         {
             Product product = _mapper.Map<Product>(command);
+            Seller seller = _mapper.Map<Seller>(command);
             using (var scope = _serviceCollection.CreateScope())
             {
                 var _sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
-                //await _sellerRepository.AddSeller(product.Seller);
-                var seller = _sellerRepository.GetSellerByEmailId(command.SellerEmail);
-                //product.SellerId = seller.Id;
-                //product.Seller = null;
+                var sellerInfo = _sellerRepository.GetSellerByEmailId(seller.Email);
+                var products = await _sellerRepository.GetProducts();
+                int productId = 1;
+                if(products != null)
+                {
+                    productId = products.LastOrDefault().Id + 1;
+                }
+                if (sellerInfo != null)
+                {
+                    sellerInfo.ProductIds.Add(productId);
+                    await _sellerRepository.UpdateSeller(sellerInfo);
+                }
+                else
+                {
+                    seller.ProductIds.Add(productId);
+                    await _sellerRepository.AddSeller(seller);
+                }                
                 await _sellerRepository.AddProduct(product);
             }                      
             return Result.Success();

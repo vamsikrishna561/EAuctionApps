@@ -16,15 +16,16 @@ namespace E_Auction.Application.MapperProfiles
         {
             CreateMap<AddProductInfoCommand, ProductDto>().ReverseMap();
             CreateMap<AddBidInfoCommand, BuyerDto>().ReverseMap();
-            CreateMap<AddProductInfoCommand, Product>()
-                .ForPath(dest => dest.Seller.FirstName, opt => opt.MapFrom(src => src.SellerFirstName))
-                .ForPath(dest => dest.Seller.LastName, opt => opt.MapFrom(src => src.SellerLastName))
-                .ForPath(dest => dest.Seller.Address, opt => opt.MapFrom(src => src.SellerAddress))
-                .ForPath(dest => dest.Seller.City, opt => opt.MapFrom(src => src.SellerCity))
-                .ForPath(dest => dest.Seller.Email, opt => opt.MapFrom(src => src.SellerEmail))
-                .ForPath(dest => dest.Seller.Phone, opt => opt.MapFrom(src => src.SellerPhone))
-                .ForPath(dest => dest.Seller.Pin, opt => opt.MapFrom(src => src.SellerPin))
-                .ForPath(dest => dest.Seller.State, opt => opt.MapFrom(src => src.SellerState));
+            CreateMap<AddProductInfoCommand, Product>();
+            CreateMap<AddProductInfoCommand, Seller>()
+                .ForPath(dest => dest.FirstName, opt => opt.MapFrom(src => src.SellerFirstName))
+                .ForPath(dest => dest.LastName, opt => opt.MapFrom(src => src.SellerLastName))
+                .ForPath(dest => dest.Address, opt => opt.MapFrom(src => src.SellerAddress))
+                .ForPath(dest => dest.City, opt => opt.MapFrom(src => src.SellerCity))
+                .ForPath(dest => dest.Email, opt => opt.MapFrom(src => src.SellerEmail))
+                .ForPath(dest => dest.Phone, opt => opt.MapFrom(src => src.SellerPhone))
+                .ForPath(dest => dest.Pin, opt => opt.MapFrom(src => src.SellerPin))
+                .ForPath(dest => dest.State, opt => opt.MapFrom(src => src.SellerState));
             CreateMap<AddBidInfoCommand, Buyer>();
             CreateMap<BuyerDto, Buyer>().ReverseMap();
             CreateMap<Product, BidsDto>();

@@ -39,17 +39,19 @@ namespace E_Auction.Application.Commands.Cosmos
             {
                 var buyerRepository = scope.ServiceProvider.GetRequiredService<IBuyerRepository>();
                 var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
-                var product = sellerRepository.GetProductById(command.ProductId);
+                var product = sellerRepository.GetProductById(command.ProductId); 
                 if(product == null)
                     return Result.Failure("Product is not found.");
                 if(product.BidEndDate < DateTime.UtcNow)
                     return Result.Failure("Bid End date is past.");
-                    var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(command.ProductId, buyer.Email);
+                    var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(buyer.Email);
                     if (buyerItem == null)
                     { 
                         await buyerRepository.PlaceBid(buyer);
-                    // Message to RabbitMQ. buyerRepository.GetBuyers()
-                     //buyerRepository.SendMessage(command);
+                    product.BuyerIds.Add(buyer.Email);
+                        await sellerRepository.UpdateProduct(product);
+                    // Message to RabbitMQ.
+                    //buyerRepository.SendMessage(command);
                     }
                     else
                     return Result.Failure("Duplicate bid.");

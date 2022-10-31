@@ -20,6 +20,6 @@ namespace E_Auction.Domain.Models.Cosmos
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; }
         
-        public List<int> BuyerIds { get; set; }
+        public List<string> BuyerIds { get; set; }
     }
 }

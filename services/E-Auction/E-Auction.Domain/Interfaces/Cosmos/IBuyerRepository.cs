@@ -8,7 +8,7 @@ namespace E_Auction.Domain.Interfaces.Cosmos
     {
         public Task PlaceBid(Buyer buyer);
         public Task UpdateBid(Buyer buyer);
-        public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId);
+        public Buyer GetBuyerByEmailIdAndProductId(string emailId);
         //public void SendMessage<T>(T message);
         
         public List<Buyer> GetBuyers();

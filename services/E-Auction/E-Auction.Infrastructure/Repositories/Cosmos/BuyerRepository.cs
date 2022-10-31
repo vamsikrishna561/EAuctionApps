@@ -29,14 +29,16 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
             await _cosmosContext.SaveChangesAsync();
         }
 
+        
+
         //public void SendMessage<T>(T buyer)
         //{
         //    _publishEndpoint.SendMessage(buyer);
         //}
 
-        
 
-        public Buyer GetBuyerByEmailIdAndProductId(int productId, string emailId)
+
+        public Buyer GetBuyerByEmailIdAndProductId(string emailId)
         {
             return _cosmosContext.Buyers.Where(x=>x.Email == emailId).FirstOrDefault();
         }

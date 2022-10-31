@@ -34,6 +34,12 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
             }
         }
 
+        public async Task UpdateSeller(Seller seller)
+        {
+                _cosmosContext.Sellers.Update(seller);
+                await _cosmosContext.SaveChangesAsync();
+        }
+
         public async Task DeleteProduct(Product product)
         {
             _cosmosContext.Products.Remove(product);
@@ -51,6 +57,13 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
         {
             return _cosmosContext.Sellers.Where(x => x.Email == emailId).FirstOrDefault();
         }
+
+        public async Task UpdateProduct(Product product)
+        {
+            _cosmosContext.Products.Update(product);
+            await _cosmosContext.SaveChangesAsync();
+        }
+
         public Product GetProductById(int productId)
         {
             return _cosmosContext.Products.Where(x=>x.Id == productId).FirstOrDefault();

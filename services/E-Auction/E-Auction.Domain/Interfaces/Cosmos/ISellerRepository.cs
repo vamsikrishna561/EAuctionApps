@@ -8,9 +8,10 @@ namespace E_Auction.Domain.Interfaces.Cosmos
     {
         public Task AddProduct(Product product);
         public Task AddSeller(Seller seller);
+        public Task UpdateSeller(Seller seller);
         public Task DeleteProduct(Product product);
         public IEnumerable<Buyer> GetBidsByProductId(int productId);
-
+        public Task UpdateProduct(Product product);
         public Task<List<Product>> GetProducts();
         public Seller GetSellerByEmailId(string emailId);
         Product GetProductById(int productId);

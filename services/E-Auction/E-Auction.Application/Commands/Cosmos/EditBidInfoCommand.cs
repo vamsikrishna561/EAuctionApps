@@ -34,7 +34,7 @@ namespace E_Auction.Application.Commands.Cosmos
                     return Result.Failure("Product is not found.");
                 if (product.BidEndDate < DateTime.UtcNow)
                     return Result.Failure("Bid End date is past.");
-                var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(command.ProductId, command.Email);
+                var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(command.Email);
                 if (buyerItem != null)
                 {
                     buyerItem.BidAmount = command.BidAmount;
