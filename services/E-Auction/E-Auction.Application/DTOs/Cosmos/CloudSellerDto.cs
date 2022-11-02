@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Application.DTOs.Cosmos
 {
-    public class SellerDto
+    public class CloudSellerDto
     {
         public int Id { get; set; }
         [Required]

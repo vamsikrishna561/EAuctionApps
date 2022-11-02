@@ -8,11 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
-    public sealed class GetBidListQuery : IQuery<BidsDto>
+    public sealed class GetBidListQuery : IQuery<CloudBidsDto>
     {
         public int ProductId { get; set; }
 
-        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, BidsDto>
+        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, CloudBidsDto>
         {
             private readonly IServiceProvider _serviceCollection;
             private readonly IMapper _mapper;
@@ -22,14 +22,14 @@ namespace E_Auction.Application.Commands.Cosmos
                 _mapper = mapper;
             }
 
-            public async Task<BidsDto> Handle(GetBidListQuery query)
+            public async Task<CloudBidsDto> Handle(GetBidListQuery query)
             {
                 using (var scope = _serviceCollection.CreateScope())
                 {
                     var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
                     var product =await sellerRepository.GetBidsWithProductById(query.ProductId);
                     //var result = sellerRepository.GetMessage<dynamic>();
-                    return _mapper.Map<BidsDto>(product);
+                    return _mapper.Map<CloudBidsDto>(product);
                 }
             }
         }

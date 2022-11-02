@@ -2,7 +2,7 @@
 
 namespace E_Auction.Application.DTOs.Cosmos
 {
-    public class BuyerDto
+    public class CloudBuyerDto
     {
         
         public int Id { get; set; }

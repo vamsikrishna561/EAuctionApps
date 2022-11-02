@@ -29,7 +29,7 @@ namespace EAuction.API.Controllers
         }
         [HttpPost]
         [Route("add-product")]
-        public async Task<IActionResult> AddProduct([FromBody] ProductDto productDto)
+        public async Task<IActionResult> AddProduct([FromBody] CloudProductDto productDto)
         {
             if (ModelState.IsValid)
             {

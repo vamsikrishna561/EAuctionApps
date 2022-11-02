@@ -42,7 +42,7 @@ namespace EAuction.API
             services.AddAutoMapper(typeof(SellerProfile));
             services.AddInfrastructureServices(Configuration);
             services.AddSingleton<Messages>();
-            services.AddHandlers();            
+            services.AddHandlers();
 
             services.AddControllers();
             services.AddApiVersioning(options =>

@@ -27,7 +27,7 @@ namespace EAuction.API.Controllers
 
         [HttpPost]
         [Route("place-bid")]
-        public async Task<IActionResult> PlaceBid([FromBody] BuyerDto buyerDto)
+        public async Task<IActionResult> PlaceBid([FromBody] CloudBuyerDto buyerDto)
         {
             if (ModelState.IsValid)
             {

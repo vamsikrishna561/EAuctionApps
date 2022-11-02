@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Application.DTOs.Cosmos
 {
-    public class BidsDto
+    public class CloudBidsDto
     {
         
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace E_Auction.Application.DTOs.Cosmos
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; } = DateTime.UtcNow;
 
-        public ICollection<BuyerDto> Buyers { get; set; }
+        public ICollection<CloudBuyerDto> Buyers { get; set; }
     }
 }

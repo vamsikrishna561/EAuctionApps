@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
-    public sealed class GetProductListQuery : IQuery<List<ProductDto>>
+    public sealed class GetProductListQuery : IQuery<List<CloudProductDto>>
     {
         public int SellerId { get; set; }
-        public sealed class GetProductListQueryHandler : IQueryHandler<GetProductListQuery,List<ProductDto>>
+        public sealed class GetProductListQueryHandler : IQueryHandler<GetProductListQuery,List<CloudProductDto>>
         {
             private readonly IServiceProvider _serviceCollection;
             private readonly IMapper _mapper;
@@ -23,14 +23,14 @@ namespace E_Auction.Application.Commands.Cosmos
                 _mapper = mapper;
             }
 
-            public async Task<List<ProductDto>> Handle(GetProductListQuery getProductListQuery)
+            public async Task<List<CloudProductDto>> Handle(GetProductListQuery getProductListQuery)
             {
                 using (var scope = _serviceCollection.CreateScope())
                 {
                     var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
                     var product = await sellerRepository.GetProducts();
                     //var result = sellerRepository.GetMessage<dynamic>();
-                    return _mapper.Map<List<ProductDto>>(product);
+                    return _mapper.Map<List<CloudProductDto>>(product);
                 }
             }
         }
