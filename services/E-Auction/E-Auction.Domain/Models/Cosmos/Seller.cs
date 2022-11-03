@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace E_Auction.Domain.Models.Cosmos
         public string State { get; set; }
         public int Pin { get; set; }
         public string Phone { get; set; }
+        [Key]
         public string Email { get; set; }
         public List<int> ProductIds { get; set; }
     }

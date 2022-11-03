@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Auction.Domain.Models.Cosmos
 {
@@ -11,6 +12,7 @@ namespace E_Auction.Domain.Models.Cosmos
         public string State { get; set; }
         public int Pin { get; set; }
         public string Phone { get; set; }
+        [Key]
         public string Email { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal BidAmount { get; set; }

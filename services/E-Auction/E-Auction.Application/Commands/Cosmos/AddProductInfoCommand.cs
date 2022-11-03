@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
-    public sealed class AddProductInfoCommand :ICommand
+    public sealed class AddProductInfoCommand : ICommand
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
@@ -47,22 +47,28 @@ namespace E_Auction.Application.Commands.Cosmos
                 var sellerInfo = _sellerRepository.GetSellerByEmailId(seller.Email);
                 var products = await _sellerRepository.GetProducts();
                 int productId = 1;
-                if(products != null)
+
+                if (products != null && products.Count > 0)
                 {
                     productId = products.LastOrDefault().Id + 1;
                 }
                 if (sellerInfo != null)
                 {
-                    sellerInfo.ProductIds.Add(productId);
+                    sellerInfo.ProductIds = seller.ProductIds ?? new System.Collections.Generic.List<int>();
+                    if (!sellerInfo.ProductIds.Any(x => x == productId))
+                    {
+                        sellerInfo.ProductIds.Add(productId);
+                    }
                     await _sellerRepository.UpdateSeller(sellerInfo);
                 }
                 else
                 {
-                    seller.ProductIds.Add(productId);
+                    seller.ProductIds = seller.ProductIds ?? new System.Collections.Generic.List<int>() { productId };
                     await _sellerRepository.AddSeller(seller);
-                }                
+                }
+                product.Id = productId;
                 await _sellerRepository.AddProduct(product);
-            }                      
+            }
             return Result.Success();
         }
     }

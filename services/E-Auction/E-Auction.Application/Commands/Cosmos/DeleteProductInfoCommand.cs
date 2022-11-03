@@ -24,13 +24,14 @@ namespace E_Auction.Application.Commands.Cosmos
             using (var scope =_serviceCollection.CreateScope())
             {
                 var _sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
+                var _buyerRepository = scope.ServiceProvider.GetRequiredService<IBuyerRepository>();
                 var product = _sellerRepository.GetProductById(command.ProductId);
                 if(product != null)
                 {
-                    if (product.BidEndDate < DateTime.UtcNow)
+                    if (product.BidEndDate < DateTime.UtcNow) 
                         return Result.Failure("Bid end date is past");
-                    var bids = _sellerRepository.GetBidsByProductId(command.ProductId);
-                    if (bids != null && bids.Any())
+                    var bids = _buyerRepository.GetBuyers();
+                    if (bids != null && product.BuyerIds != null && bids.Any(x=> product.BuyerIds.Any(y=>y.Contains(x.Email))))
                         return Result.Failure("Product is associated with bids.");
                     await _sellerRepository.DeleteProduct(product);
                 }

@@ -5,11 +5,12 @@ using E_Auction.Domain.Interfaces.Cosmos;
 using E_Auction.Domain.Models.Cosmos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
-    public sealed class AddBidInfoCommand :ICommand
+    public sealed class AddBidInfoCommand : ICommand
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -39,21 +40,22 @@ namespace E_Auction.Application.Commands.Cosmos
             {
                 var buyerRepository = scope.ServiceProvider.GetRequiredService<IBuyerRepository>();
                 var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
-                var product = sellerRepository.GetProductById(command.ProductId); 
-                if(product == null)
+                var product = sellerRepository.GetProductById(command.ProductId);
+                if (product == null)
                     return Result.Failure("Product is not found.");
-                if(product.BidEndDate < DateTime.UtcNow)
+                if (product.BidEndDate < DateTime.UtcNow)
                     return Result.Failure("Bid End date is past.");
-                    var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(buyer.Email);
-                    if (buyerItem == null)
-                    { 
-                        await buyerRepository.PlaceBid(buyer);
-                    product.BuyerIds.Add(buyer.Email);
-                        await sellerRepository.UpdateProduct(product);
+                var buyerItem = buyerRepository.GetBuyerByEmailIdAndProductId(buyer.Email);
+                if (buyerItem == null)
+                {
+                    await buyerRepository.PlaceBid(buyer);
+                    if (product.BuyerIds != null && product.BuyerIds.Any(x => x.Contains(buyer.Email)))
+                        product.BuyerIds.Add(buyer.Email);
+                    await sellerRepository.UpdateProduct(product);
                     // Message to RabbitMQ.
                     //buyerRepository.SendMessage(command);
-                    }
-                    else
+                }
+                else
                     return Result.Failure("Duplicate bid.");
             }
             return Result.Success();

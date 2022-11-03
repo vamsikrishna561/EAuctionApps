@@ -5,6 +5,8 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
@@ -27,9 +29,18 @@ namespace E_Auction.Application.Commands.Cosmos
                 using (var scope = _serviceCollection.CreateScope())
                 {
                     var sellerRepository = scope.ServiceProvider.GetRequiredService<ISellerRepository>();
-                    var product =await sellerRepository.GetBidsWithProductById(query.ProductId);
+                    var buyerRepository = scope.ServiceProvider.GetRequiredService<IBuyerRepository>();
+                    var product = sellerRepository.GetProductById(query.ProductId);
+                    if (product == null)
+                        return null;
+                    var buyers = buyerRepository.GetBuyers();
+                    if (buyers == null)
+                        return null;
+                    buyers.FindAll(x => {
+                        return product.BuyerIds.Any(y => y == x.Email);
+                    });
                     //var result = sellerRepository.GetMessage<dynamic>();
-                    return _mapper.Map<CloudBidsDto>(product);
+                    return _mapper.Map<CloudBidsDto>(buyers);
                 }
             }
         }

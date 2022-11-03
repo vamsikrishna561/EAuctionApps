@@ -46,12 +46,12 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
             await _cosmosContext.SaveChangesAsync();            
         }
 
-        public IEnumerable<Buyer> GetBidsByProductId(int productId)
-        {
-            return _cosmosContext.Buyers
-                //.Where(x=>x.ProductId == productId)
-                .ToList();
-        }
+        //public IEnumerable<Buyer> GetBidsByProductId(int productId)
+        //{
+        //    return _cosmosContext.Buyers
+        //        //.Where(x=>x.ProductId == productId)
+        //        .ToList();
+        //}
 
         public Seller GetSellerByEmailId(string emailId)
         {

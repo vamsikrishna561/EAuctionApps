@@ -20,9 +20,9 @@ namespace E_Auction.Application.DTOs.Cosmos
         public int CategoryId { get; set; }
         public decimal StartingPrice { get; set; }
         public DateTime BidEndDate { get; set; } = DateTime.UtcNow;
-        public CategoryDto Category { get; set; }
+        //public CategoryDto Category { get; set; }
         public CloudSellerDto Seller { get; set; }
 
-        public virtual List<CloudBuyerDto> Buyers { get; set; }
+        //public virtual List<CloudBuyerDto> Buyers { get; set; }
     }
 }
