@@ -5,7 +5,6 @@ namespace E_Auction.Application.DTOs.Cosmos
     public class CloudBuyerDto
     {
         
-        public int Id { get; set; }
         [Required]
         [StringLength(30, MinimumLength = 5)]
         public string FirstName { get; set; }

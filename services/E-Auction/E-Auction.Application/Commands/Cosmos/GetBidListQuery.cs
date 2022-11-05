@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 
 namespace E_Auction.Application.Commands.Cosmos
 {
-    public sealed class GetBidListQuery : IQuery<CloudBidsDto>
+    public sealed class GetBidListQuery : IQuery<List<CloudBuyerDto>>
     {
         public int ProductId { get; set; }
 
-        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, CloudBidsDto>
+        internal sealed class GetListQueryHandler : IQueryHandler<GetBidListQuery, List<CloudBuyerDto>>
         {
             private readonly IServiceProvider _serviceCollection;
             private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace E_Auction.Application.Commands.Cosmos
                 _mapper = mapper;
             }
 
-            public async Task<CloudBidsDto> Handle(GetBidListQuery query)
+            public async Task<List<CloudBuyerDto>> Handle(GetBidListQuery query)
             {
                 using (var scope = _serviceCollection.CreateScope())
                 {
@@ -40,7 +40,7 @@ namespace E_Auction.Application.Commands.Cosmos
                         return product.BuyerIds.Any(y => y == x.Email);
                     });
                     //var result = sellerRepository.GetMessage<dynamic>();
-                    return _mapper.Map<CloudBidsDto>(buyers);
+                    return _mapper.Map<List<CloudBuyerDto>>(buyers);
                 }
             }
         }

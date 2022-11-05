@@ -12,7 +12,6 @@ namespace E_Auction.Application.Commands.Cosmos
 {
     public sealed class AddBidInfoCommand : ICommand
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -49,7 +48,14 @@ namespace E_Auction.Application.Commands.Cosmos
                 if (buyerItem == null)
                 {
                     await buyerRepository.PlaceBid(buyer);
-                    if (product.BuyerIds != null && product.BuyerIds.Any(x => x.Contains(buyer.Email)))
+                    if(product.BuyerIds == null)
+                    {
+                        product.BuyerIds = new System.Collections.Generic.List<string>()
+                        {
+                            buyer.Email
+                        };
+                    }
+                    else if (!product.BuyerIds.Any(x => x.Contains(buyer.Email)))
                         product.BuyerIds.Add(buyer.Email);
                     await sellerRepository.UpdateProduct(product);
                     // Message to RabbitMQ.
