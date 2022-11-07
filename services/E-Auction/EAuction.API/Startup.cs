@@ -89,26 +89,26 @@ namespace EAuction.API
                 app.UseDeveloperExceptionPage();
                 //app.UseSwagger();
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EAuction.API v1"));
-                app.UseSwagger(options =>
-                {
-                    options.PreSerializeFilters.Add((swagger, req) =>
-                    {
-                        swagger.Servers = new List<OpenApiServer>() { new OpenApiServer() { Url = $"https://{req.Host}" } };
-                    });
-                });
-
-                app.UseSwaggerUI(options =>
-                {
-                    foreach (var desc in apiVersionDescriptionProvider.ApiVersionDescriptions)
-                    {
-                        options.SwaggerEndpoint($"../swagger/{desc.GroupName}/swagger.json", desc.ApiVersion.ToString());
-                        options.DefaultModelsExpandDepth(-1);
-                        options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
-                    }
-                });
+                
 
             }
+            app.UseSwagger(options =>
+            {
+                options.PreSerializeFilters.Add((swagger, req) =>
+                {
+                    swagger.Servers = new List<OpenApiServer>() { new OpenApiServer() { Url = $"https://{req.Host}" } };
+                });
+            });
 
+            app.UseSwaggerUI(options =>
+            {
+                foreach (var desc in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint($"../swagger/{desc.GroupName}/swagger.json", desc.ApiVersion.ToString());
+                    options.DefaultModelsExpandDepth(-1);
+                    options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+                }
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
