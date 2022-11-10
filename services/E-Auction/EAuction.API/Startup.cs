@@ -68,6 +68,11 @@ namespace EAuction.API
             {
                 options.IncludeXmlComments(xmlFilePath);
             });
+            services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
+
 
         }
 
@@ -92,6 +97,7 @@ namespace EAuction.API
                 
 
             }
+            app.UseCors("corsapp");
             app.UseSwagger(options =>
             {
                 options.PreSerializeFilters.Add((swagger, req) =>

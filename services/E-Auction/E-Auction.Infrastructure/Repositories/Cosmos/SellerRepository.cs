@@ -45,6 +45,10 @@ namespace E_Auction.Infrastructure.Repositories.Cosmos
             _cosmosContext.Products.Remove(product);
             await _cosmosContext.SaveChangesAsync();            
         }
+        async Task<List<Seller>> GetSellers()
+        {
+            return await _cosmosContext.Sellers.ToListAsync();
+        }
 
         //public IEnumerable<Buyer> GetBidsByProductId(int productId)
         //{

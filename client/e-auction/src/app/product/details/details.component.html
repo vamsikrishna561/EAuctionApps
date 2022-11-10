@@ -6,7 +6,7 @@
         <div class="col">
           <select #seller class="form-control my-form" name="sel" id="sel" (change)="OnSelectedSeller(seller.value);">
             <option [value]="0">Select Seller</option>
-            <option *ngFor="let item of lstSellers" [value]="item.id">{{item.email}}</option>
+            <option *ngFor="let item of lstSellers" [value]="item.email">{{item.email}}</option>
           </select>
         </div>
       </div>

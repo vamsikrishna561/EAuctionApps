@@ -69,5 +69,7 @@ namespace E_Auction.Infrastructure.Repositories
         {
             return await _eAuctionContext.Products.Where(x => x.Id == productId).Include(y => y.Buyers).FirstOrDefaultAsync();
         }
+
+        
     }
 }

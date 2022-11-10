@@ -39,6 +39,7 @@ namespace E_Auction.Application.MapperProfiles
             //    .ForPath(dest => dest.SellerState, opt => opt.MapFrom(src => src.Seller.State));
             CreateMap<AddBidInfoCommand, Buyer>();
             CreateMap<Buyer, CloudBuyerDto>();
+            CreateMap<Seller, CloudSellerDto>().ReverseMap();
             CreateMap<CloudBuyerDto, AddBidInfoCommand>().ReverseMap();
             //CreateMap<Product, BidsDto>();
             CreateMap<Product, CloudProductDto>();

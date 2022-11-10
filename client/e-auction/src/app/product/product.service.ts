@@ -84,7 +84,14 @@ export class ProductService {
 
   getAllproducts(): Observable<any[]> {
     //console.log(this.httpClient);
-    return this.httpClient.get<any[]>(`Seller/get-products`).pipe(map((products) => {
+    return this.httpClient.get<any[]>(`SellerCloud/get-products`).pipe(map((products) => {
+      return products;
+    }));
+  }
+
+  getProductsBySeller(email:string): Observable<any[]> {
+    //console.log(this.httpClient);
+    return this.httpClient.get<any[]>(`SellerCloud/get-products/${email}`).pipe(map((products) => {
       return products;
     }));
   }
@@ -92,9 +99,13 @@ export class ProductService {
   //deleteProduct(productId: number): Observable<any> {
   //  return this.httpClient.delete<Product>(`delete/${productId}`);
   //}
-
+  GetAllSellers(): Observable<any> {
+    return this.httpClient.get<any>(`SellerCloud/get-sellers`).pipe(map((products) => {
+      return products;
+    }));
+  }
   GetAllBids(productId: number): Observable<any> {
-    return this.httpClient.get<any>(`Seller/show-bids/${productId}`).pipe(map((products) => {
+    return this.httpClient.get<any>(`SellerCloud/show-bids/${productId}`).pipe(map((products) => {
       return products;
     }));
   }

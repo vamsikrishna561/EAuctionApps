@@ -12,6 +12,7 @@ namespace E_Auction.Domain.Interfaces.Cosmos
         public Task DeleteProduct(Product product);
         //public IEnumerable<Buyer> GetBidsByProduct(int productId);
         public Task UpdateProduct(Product product);
+        public Task<List<Seller>> GetSellers();
         public Task<List<Product>> GetProducts();
         public Seller GetSellerByEmailId(string emailId);
         Product GetProductById(int productId);

@@ -23,26 +23,36 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllproducts();
+    this.productService.GetAllSellers().subscribe((sellers)=>{
+      this.lstSellers = sellers;
+    });
+
+    //this.getAllproducts();
   }
 
-  getAllproducts() {
-    this.productService.getAllproducts().subscribe(data => {
+  getAllproducts(value:string) {
+    
+    this.productService.getProductsBySeller(value).subscribe(data => {
       this.products = data;
-      let sellers:Seller[]=[];
-      data.forEach(function(value){
-        if(sellers.findIndex(x=>x.email === value.seller.email) === -1)
-        sellers.push(value.seller);
+      //let sellers:Seller[]=[];
+      // data.forEach(function(value){
+      //   if(sellers.findIndex(x=>x.email === value.seller.email) === -1)
+      //   sellers.push(value.seller);
 
+      // });
+      // this.lstSellers = sellers;
+      if(this.products && this.products !== null && this.products.length >0)
+      this.productService.GetAllBids(this.products[0].id!).subscribe((sellers)=>{
+         this.bids = sellers;
       });
-      this.lstSellers = sellers;
     });
   }
 
   OnSelectedSeller(value:string) {
-    this.selProducts ={};
-    this.bids = [];
-    this.lstProducts = this.products.filter(a => a.seller?.id === +value);
+    this.getAllproducts(value);
+    // this.selProducts ={};
+    // this.bids = [];
+    // this.lstProducts = this.products.filter(a => a.seller?.id === +value);
   }
 
   OnSelectedProduct(value:string) {

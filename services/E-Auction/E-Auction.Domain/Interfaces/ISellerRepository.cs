@@ -16,6 +16,7 @@ namespace E_Auction.Domain.Interfaces
 
         public Task<List<Product>> GetProducts();
         public Seller GetSellerByEmailId(string emailId);
+        
         Product GetProductById(int productId);
         public T GetMessage<T>();
         Task<Product> GetBidsWithProductById(int productId);

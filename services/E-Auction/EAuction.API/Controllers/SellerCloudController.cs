@@ -93,5 +93,33 @@ namespace EAuction.API.Controllers
             //else
               //  return BadRequest("Invalid seller id");
         }
+
+        [HttpGet]
+        [Route("get-products/{sellerId}")]
+        public async Task<IActionResult> GetProducts(string sellerId)
+        {
+            //if (sellerId > 0)
+            // {
+            GetProductListQuery getBidListQuery = new();
+            var list = await _messages.Dispatch(getBidListQuery);
+            return Ok(list);
+            //}
+            //else
+            //  return BadRequest("Invalid seller id");
+        }
+
+        [HttpGet]
+        [Route("get-sellers")]
+        public async Task<IActionResult> GetSellers()
+        {
+            //if (sellerId > 0)
+            // {
+            GetSellerListQuery getBidListQuery = new();
+            var list = await _messages.Dispatch(getBidListQuery);
+            return Ok(list);
+            //}
+            //else
+            //  return BadRequest("Invalid seller id");
+        }
     }
 }
