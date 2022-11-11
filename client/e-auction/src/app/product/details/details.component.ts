@@ -34,6 +34,7 @@ export class DetailsComponent implements OnInit {
     
     this.productService.getProductsBySeller(value).subscribe(data => {
       this.products = data;
+      this.lstProducts = data;
       //let sellers:Seller[]=[];
       // data.forEach(function(value){
       //   if(sellers.findIndex(x=>x.email === value.seller.email) === -1)
@@ -41,10 +42,7 @@ export class DetailsComponent implements OnInit {
 
       // });
       // this.lstSellers = sellers;
-      if(this.products && this.products !== null && this.products.length >0)
-      this.productService.GetAllBids(this.products[0].id!).subscribe((sellers)=>{
-         this.bids = sellers;
-      });
+      
     });
   }
 
@@ -59,8 +57,11 @@ export class DetailsComponent implements OnInit {
     this.selProductId = +value;
     this.selProducts = this.lstProducts.filter(a => a.id == this.selProductId)[0];
     if (this.selProductId != 0) { 
-      this.bids = this.selProducts.buyers;
+      this.productService.GetAllBids(this.products[0].id!).subscribe((sellers)=>{
+        this.bids = sellers;
+     });
     }
+      
   } 
 
   getFullAddress(address: string, city: string, state: string, zip: string) { return address + ", " + city + " " + state + " " + zip }
