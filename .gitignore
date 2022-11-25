@@ -20,3 +20,8 @@
 /services/E-Auction/E-Auction.Domain/bin/Debug/net6.0
 /services/E-Auction/E-Auction.Infrastructure/bin/Debug/net6.0
 /services/E-Auction.API/EAuction.API/EAuction.API.xml
+/.vs/EAuctionApps/config/applicationhost.config
+/.vs/EAuctionApps/FileContentIndex
+/.vs/EAuctionApps/v16/.suo
+/.vs/EAuctionApps/v17/.suo
+/.vs/VSWorkspaceState.json
