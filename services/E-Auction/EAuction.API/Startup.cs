@@ -102,7 +102,8 @@ namespace EAuction.API
             {
                 options.PreSerializeFilters.Add((swagger, req) =>
                 {
-                    swagger.Servers = new List<OpenApiServer>() { new OpenApiServer() { Url = $"https://{req.Host}" } };
+                    swagger.Servers = new List<OpenApiServer>() { new OpenApiServer() { Url = $"https://{req.Host}" },
+                    new OpenApiServer() { Url = $"http://{req.Host}" } };
                 });
             });
 

@@ -6,7 +6,7 @@ const routes: Routes = [{ path: 'product', loadChildren: () => import('./product
 { path: '**', component: AppComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
